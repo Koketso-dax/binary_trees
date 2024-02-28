@@ -12,8 +12,10 @@
  * Recursively traverse the left subtree.
  * Recursively traverse the right subtree.
 */
-void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int)) {
-    if (tree == NULL || func == NULL) {
+void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int))
+{
+    if (tree == NULL || func == NULL)
+    {
         return;  
     }
 

@@ -8,18 +8,39 @@ size_t binary_tree_nodes(const binary_tree_t *tree)
 {
 	size_t left_nodes, right_nodes;
 
-	if (tree == NULL)
+	if (!tree || (!tree->left && !tree->right))
 	{
 		return (0);
 	}
 
-	if (tree->left != NULL || tree->right != NULL)
-	{
+	return (binary_tree_size(tree) - binary_tree_leaves(tree));
+}
+
+/**
+ * binary_tree_size - determines size of a binary tree
+ * @tree: input tree
+ * Return: size of the tree 0 if tree is NULL.
+ */
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+	if (!tree)
+		return (0);
+
+	return (binary_tree_size(tree->left) + binary_tree_size(tree->right) + 1);
+}
+
+/**
+ * binary_tree_leaves - counts the leaves in a binary tree
+ * @tree: input tree
+ * Return: number of leaves 0 if tree is NULL
+ */
+size_t binary_tree_leaves(const binary_tree_t *tree)
+{
+	if (!tree)
+		return (0);
+
+	if (!tree->left && !tree->right)
 		return (1);
-	}
 
-	left_nodes = binary_tree_nodes(tree->left);
-	right_nodes = binary_tree_nodes(tree->right);
-
-	return (left_nodes + right_nodes);
+	return (binary_tree_leaves(tree->left) + binary_tree_leaves(tree->right));
 }
